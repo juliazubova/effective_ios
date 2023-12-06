@@ -8,33 +8,69 @@
 import SwiftUI
 
 struct MainDoctor: View {
+    let name: String
+    let speciality: String
+    let date: String
+    let time: String
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 16) {
-            HStack (alignment: .center, spacing: 6) {
-                Image("doctor1")
-                    .padding(20)
-                    .frame(width: 327, alignment: .top)
-                    .background(Theme.Colors.blueCard)
-                    .cornerRadius(12)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Dr. Imran Syahir").font(Theme.Fonts.poppins_16)
-                        .foregroundColor(Theme.Colors.blackHeaderText)
-                    Text("General Doctor")
+            VStack (alignment: .center, spacing: Theme.Spacing.short) {
+                HStack (alignment: .center, spacing: Theme.Spacing.small) {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.white)
+                        Image("doctor1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    }
+                    .frame(width: Theme.Values.imgDoctorSize,
+                           height: Theme.Values.imgDoctorSize)
+                    .cornerRadius(Theme.Values.cornerRadius100)
+                    VStack (alignment: .leading, spacing: Theme.Spacing.tiny) {
+                        Text(name)
+                            .font(Theme.Fonts.poppins_bold_16)
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                        Text(speciality)
+                            .font(Theme.Fonts.poppins_12)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                    Image("arrow-right")
+                        .foregroundColor(.white)
                 }
-                .padding(0)
+                .padding(Theme.Padding.none)
+                .frame(maxWidth: .infinity, alignment: .center)
+                Divider().background(.white)
+                HStack (alignment: .top, spacing: Theme.Spacing.huge) {
+                    HStack (spacing: Theme.Spacing.tiny) {
+                        Image("calendar-blue")
+                            .resizable()
+                            .frame(width: Theme.Values.imgSize16,
+                                   height: Theme.Values.imgSize16)
+                        Text(date)
+                            .font(Theme.Fonts.poppins_12)
+                    }
+                    HStack (spacing: Theme.Spacing.tiny) {
+                        Image("clock")
+                            .resizable()
+                            .frame(width: Theme.Values.imgSize16,
+                                   height: Theme.Values.imgSize16)
+                        Text(time)
+                            .font(Theme.Fonts.poppins_12)
+                    }
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .topLeading)
             }
+            .padding(Theme.Values.doctorCardPadding)
+            .frame(maxWidth: .infinity)
+            .background(Theme.Colors.blueCard)
+            .cornerRadius(Theme.Values.imgCornerRadius)
         }
-        .padding(20)
-        .frame(width: 327, alignment: .top)
-        .background(Color(red: 0.28, green: 0.58, blue: 1))
-        .cornerRadius(12)
-        
     }
-}
 
-struct MainCard_Previews: PreviewProvider {
-    static var previews: some View {
-        MainDoctor()
-    }
+
+#Preview {
+    ContentView()
 }
